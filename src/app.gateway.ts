@@ -35,5 +35,6 @@ export class AppGateway
 
   handleConnection(client: Socket, ...args: any[]) {
     this.logger.log(`Client connected: ${client.id}`);
+    this.server.emit('onConnected', client.id);
   }
 }
