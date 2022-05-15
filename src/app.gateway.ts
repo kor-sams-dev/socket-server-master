@@ -9,7 +9,7 @@ import {
 import { Logger } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 
-@WebSocketGateway(81, {
+@WebSocketGateway({
   cors: {
     origin: '*',
   },
@@ -23,6 +23,7 @@ export class AppGateway
   @SubscribeMessage('msgToServer')
   handleMessage(client: Socket, payload: string): void {
     this.server.emit('msgToClient', payload);
+    this.logger.log(`Client(${client.id}) Send: ${payload}`);
   }
 
   afterInit(server: Server) {
@@ -35,6 +36,5 @@ export class AppGateway
 
   handleConnection(client: Socket, ...args: any[]) {
     this.logger.log(`Client connected: ${client.id}`);
-    this.server.emit('onConnected', client.id);
   }
 }
