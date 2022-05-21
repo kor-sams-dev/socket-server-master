@@ -8,6 +8,7 @@ async function bootstrap() {
   await redisIoAdapter.connectToRedis();
 
   app.useWebSocketAdapter(redisIoAdapter);
+  app.enableCors();
   await app.listen(process.env.NODE_PORT);
 }
 bootstrap();
