@@ -13,7 +13,6 @@ import { Socket, Server } from 'socket.io';
   cors: {
     origin: '*',
   },
-  transports: ['websocket'],
 })
 export class AppGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
